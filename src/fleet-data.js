@@ -12,7 +12,7 @@ export let fleet = [
     type:'drone',
     model:'Amazon 1550',
     airTimeHours:'2100',
-    base:'New york',
+    bbase:'New york',
     latLong:'40.771996 -73.978531',
   },
   {
@@ -28,7 +28,7 @@ export let fleet = [
     type:'car',
     make:'Tesla',
     model:'Quick Transport',
-    miles:'15600',
+    miles:'4500',
     latLong:'40.773272 -73.968875',
   },
   {

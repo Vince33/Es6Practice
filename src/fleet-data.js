@@ -40,7 +40,7 @@ export let fleet = [
     latLong:'40.774182 -73.967575',
   },
   {
-    license:'BT8900',
+    license:'BT7900',
     type:'car',
     make:'AMC',
     model:'Gremlin',

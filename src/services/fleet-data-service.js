@@ -13,6 +13,24 @@ export class FleetDataService {
     this.errors = [];
   }
 
+  getCarsSortedByLicense(){
+    return this.cars.sort(function(car1,car2){
+      if (car1.license < car2.license){
+      return -1;
+    }
+      if (car1.license > car2.license){
+        return  1;
+      }
+      return 0;
+    })
+
+  }
+
+  filterCarsByMake(filter){
+    return this.cars.filter(car => car.make.indexOf(filter) >= 0 );
+  }
+
+
   loadData(fleet){
     for (let data of fleet) {
       switch(data.type){
@@ -30,7 +48,7 @@ export class FleetDataService {
         if(this.validateDroneData(data)){
           let drone = this.loadDrone(data);
           if(drone)
-            this.drone.push(drone);
+            this.drones.push(drone);
         } else {
           let e = new DataError('invalid drone data', data)
         }
@@ -46,6 +64,7 @@ export class FleetDataService {
   loadCar(car){
     try {
       let c = new Car(car.license, car.model, car.latLong);
+
       c.miles = car.miles;
       c.make = car.make;
 
@@ -54,9 +73,9 @@ export class FleetDataService {
 
       this.errors.push(new DataError('error loading car', car));
 
-    } finally {
-      return null;
     }
+    return null;
+
 
   }
 
@@ -67,12 +86,11 @@ export class FleetDataService {
       d.base = drone.base;
       return d;
     } catch (e) {
-
+      debugger;
       this.errors.push(new DataError('error loading drone', drone));
-
-    } finally {
-      return null;
     }
+    return null;
+
 
   }
 
@@ -112,5 +130,14 @@ export class FleetDataService {
 
 
   }
+  getCarByLicense(license){
+
+    return this.cars.find(function(car){
+
+      return car.license === license;
+
+    });
+  }
+
 
 }

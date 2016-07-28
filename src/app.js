@@ -1,36 +1,24 @@
 import $ from 'jquery';
-import {Car} from './classes/car.js';
-import {Drone} from './classes/drone.js';
 import {fleet} from './fleet-data.js';
 import {FleetDataService} from './services/fleet-data-service.js';
-import {Button} from './ui/button.js';
-import {Image} from './ui/image.js';
-import {TitleBar} from './ui/title-bar.js';
-import {DataTable} from './ui/data-table.js';
+import {ApplicationBase} from './framework/application-base.js';
+import {HomePage} from './pages/home-page.js';
+import {CarsPage} from './pages/cars-page.js';
+import {DronesPage} from './pages/drones-page.js';
 
 
-let headers = "License Make Model Miles".split(' ');
-let dataService = new FleetDataService();
-dataService.loadData(fleet);
-let dt = new DataTable(headers, dataService.cars);
+export class App extends ApplicationBase {
+  constructor () {
+    super('Fleet Manager');
+    this.dataService = new FleetDataService();
+    this.dataService.loadData(fleet);
 
-console.log(headers);
-dt.appendToElement($('body'));
+    this.addRoute('Home', new HomePage(), true);
+    this.addRoute('Cars', new CarsPage());
+    this.addRoute('Drones', new DronesPage);
+    this.addRoute('Map',null);
+  }
+}
 
-
-// let tb = new TitleBar('Acme Drones inc.');
-// tb.addLink('Home', '');
-// tb.addLink('Cars', '');
-// tb.addLink('Drones', '');
-// tb.addLink('Map', '');
-// tb.appendToElement($('body'));
-
-// let b = new Button('Click Me');
-// b.appendToElement($('body'));
-//
-// let i = new Image('../images/music-media-record-gramophone-phonograph-vinyl-rpm-audio.jpg');
-// i.appendToElement($('body'));
-
-
-
-// console.log(car);
+export let application = new App();
+application.show($('body'));

@@ -12,7 +12,7 @@ export let fleet = [
     type:'drone',
     model:'Amazon 1550',
     airTimeHours:'2100',
-    bbase:'New york',
+    base:'New york',
     latLong:'40.771996 -73.978531',
   },
   {
